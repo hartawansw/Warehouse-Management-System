@@ -10,6 +10,20 @@ Built by **Hartawan Sampoerna Wijaya** — Warehouse & Supply Chain professional
 
 Most small-to-mid warehouse teams either overpay for enterprise WMS licenses or run stock control through scattered Excel files with no audit trail, no role separation, and no live dashboard. This project is a working alternative: a single HTML file that any warehouse staff can open in a browser — no server, no database setup, no IT ticket required — and get role-based stock counting, in/out tracking, and management-ready reporting out of the box.
 
+## Screenshots
+
+| Stock Dashboard | Rekap Stok |
+|---|---|
+| ![Stock Dashboard](./screenshots/stock-dashboard.png) | ![Rekap Stok](./screenshots/rekap-stok.png) |
+
+| Product Master | Stock In/Out |
+|---|---|
+| ![Product Master](./screenshots/product-master.png) | ![Stock In/Out](./screenshots/in-out.png) |
+
+| Stock Opname (Cycle Counting) | Admin — Role Permissions |
+|---|---|
+| ![Stock Opname](./screenshots/stock-opname.png) | ![Admin Panel](./screenshots/admin-panel.png) |
+
 ## Features
 
 - **Role-Based Access Control** — three access levels (Viewer, Warehouse, Admin) gated by password, each with a distinct permission set enforced on every page (see the in-app Role Permissions matrix).
