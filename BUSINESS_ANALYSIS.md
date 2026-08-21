@@ -7,6 +7,7 @@ Warehouse teams at small-to-mid-sized companies routinely operate stock control 
 - **No single source of truth.** System quantity, physical count, and in/out movement live in separate files that are rarely reconciled in real time, so stock discrepancies are discovered late — often only during a formal audit.
 - **No audit trail.** Excel-based counting has no built-in log of who counted what, when, or what changed between counts — making variance investigation slow and often inconclusive.
 - **No access control.** Anyone with the file can edit system quantities, categories, or historical records, with no separation between "can view," "can transact," and "can administer."
+- **No proactive stock visibility.** Reorder points and slow-moving/dead stock are typically caught reactively — a stockout on the floor, or a year-end audit flagging inventory that hasn't moved in months — rather than surfaced as they happen.
 - **High tooling cost for small operations.** Commercial WMS/ERP modules (SAP WM, Oracle WMS, etc.) require licensing, IT infrastructure, and implementation budget that many mid-sized warehouses — especially 3PLs, distributors, or single-site manufacturers — can't justify for their scale.
 - **Slow, manual reporting.** Producing a stock opname variance report or an inventory value summary for management typically means hours of manual Excel work, usually the night before a meeting.
 
@@ -23,10 +24,11 @@ This gap — between "too manual" (Excel/paper) and "too expensive/complex" (ent
 | Problem | How the WMS addresses it |
 |---|---|
 | No single source of truth | All product master data, counts, and in/out transactions live in one connected dataset — Rekap Stok and SOH always reflect the latest state. |
-| No audit trail | Every stock opname count and every IN/OUT transaction is timestamped and attributed to an officer; multiple cycles are preserved independently rather than overwritten. |
+| No audit trail | Every stock opname count and every IN/OUT transaction is timestamped and attributed to an officer; a dedicated Activity Log additionally captures logins, product changes, cycle events, and reorder-point edits system-wide. |
 | No access control | Role-based access (Viewer / Warehouse / Admin) restricts who can transact, who can administer, and who can only view — enforced on every page. |
+| No proactive stock visibility | Reorder-point alerts flag low/out-of-stock SKUs on login and on the dashboard; a Stock Aging Report classifies every SKU by days-since-last-movement so slow-moving and dead stock surface on their own, not just at year-end audit. |
 | High tooling cost | Zero licensing cost, zero hosting cost, zero IT infrastructure — a single HTML file that runs in any browser. |
-| Slow manual reporting | Dashboards, variance reports, and CSV/Excel exports are generated instantly from live data, not rebuilt by hand each cycle. |
+| Slow manual reporting | Dashboards, variance reports, aging analysis, and CSV/Excel exports are generated instantly from live data, not rebuilt by hand each cycle. |
 
 ## 4. Operational Impact (Qualitative)
 
@@ -34,9 +36,12 @@ Based on direct warehouse operations experience, the categories of impact this k
 
 - **Faster discrepancy detection** — variances surface as soon as a count is entered, not weeks later during a formal audit.
 - **Reduced reconciliation effort** — Rekap Stok auto-calculates stock on hand, total IN/OUT, and inventory value per SKU instead of requiring a manual VLOOKUP-heavy spreadsheet rebuild.
-- **Clearer accountability** — because counts and transactions are tied to an officer and a timestamp, disputes over "who changed what" are answerable from the data itself.
+- **Fewer stockout surprises** — reorder-point alerts move replenishment from a reactive "we ran out" conversation to a proactive one, visible the moment a SKU crosses its threshold.
+- **Earlier dead-stock identification** — the Stock Aging Report gives a standing answer to "what hasn't moved in months," a question that otherwise only gets asked once a year during inventory write-off review — meaning capital tied up in stale stock can be flagged and acted on sooner.
+- **More accurate data capture on the floor** — camera-based barcode/QR scanning removes manual typos from material code entry during counts and transactions, without requiring dedicated scanner hardware.
+- **Clearer accountability** — because counts, transactions, and now general system actions are tied to an officer/role and a timestamp via the Activity Log, disputes over "who changed what" are answerable from the data itself, not just for counts but for the system as a whole.
 - **Lower onboarding friction for new staff** — a browser-based scan-and-search interface is faster to train on than a shared Excel template with hidden formulas.
-- **Management-ready reporting on demand** — accuracy rate, variance by category, and inventory value are available at any time, not just when someone has time to build the report.
+- **Management-ready reporting on demand** — accuracy rate, variance by category, inventory value, and stock aging are available at any time, not just when someone has time to build the report.
 
 *(Note: this is a personal/independent project rather than a company-commissioned system, so the figures above are described as directional operational benefits based on the author's warehouse management experience — not audited before/after metrics from a specific deployment.)*
 
@@ -47,8 +52,11 @@ This project demonstrates the intersection of two skill sets that are usually si
 1. **Domain expertise** — over 6 years of hands-on warehouse and supply chain operations (SAP WM, Oracle, Odoo across multiple companies), meaning the requirements behind this tool come from lived operational pain points, not a generic tutorial spec.
 2. **Technical execution** — the ability to translate that domain knowledge directly into a working, role-secured, data-driven application — the same bridging skill required in an IT Business Analyst role, but carried all the way through to a shipped product rather than stopping at a requirements document.
 
+The most recent feature set (reorder alerts, stock aging, camera scanning, activity log, dark mode) was scoped and prioritized the way a real backlog would be: each feature maps to a specific gap identified in Section 1 rather than being added for its own sake — reflecting the requirements-to-feature traceability expected in BA work.
+
 ## 6. Limitations & Honest Scope
 
 - This is a client-side tool using browser `localStorage`, not a multi-user real-time database — it's best suited to a single device/workstation or a manually-synced small team (via the JSON export/import backup feature), not a large multi-site operation.
+- Role-based access control is enforced at the UI level, not via a real backend/auth layer — sufficient for its intended use case (a trusted internal team), but not a substitute for production-grade authentication if the tool were ever scaled up.
 - It has not been deployed in a production warehouse environment; it is an independent proof-of-concept built to demonstrate both the operational understanding and the technical capability.
 - No automated testing suite is included — a natural next step if this were to be extended toward production use.
