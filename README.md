@@ -17,14 +17,32 @@ With 7+ years in warehouse and supply chain operations, I saw firsthand how much
 
 <table>
   <tr>
-    <td width="33%"><img src="screenshots/stock-dashboard.png" alt="Stock Dashboard"/><p align="center"><b>Stock Dashboard</b></p></td>
-    <td width="33%"><img src="screenshots/product-master.png" alt="Product Master"/><p align="center"><b>Product Master</b></p></td>
-    <td width="33%"><img src="screenshots/stock-opname.png" alt="Stock Opname"/><p align="center"><b>Stock Opname</b></p></td>
+    <td align="center" width="33%">
+      <img src="screenshots/stock-dashboard.png" alt="Stock Dashboard" width="380"/><br/>
+      <b>Stock Dashboard</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/product-master.png" alt="Product Master" width="380"/><br/>
+      <b>Product Master</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/stock-opname.png" alt="Stock Opname" width="380"/><br/>
+      <b>Stock Opname</b>
+    </td>
   </tr>
   <tr>
-    <td width="33%"><img src="screenshots/in-out.png" alt="Stock In/Out"/><p align="center"><b>Stock In / Out</b></p></td>
-    <td width="33%"><img src="screenshots/rekap-stok.png" alt="Rekap Stok"/><p align="center"><b>Rekap Stok</b></p></td>
-    <td width="33%"><img src="screenshots/admin-panel.png" alt="Admin Panel"/><p align="center"><b>Admin Panel</b></p></td>
+    <td align="center" width="33%">
+      <img src="screenshots/in-out.png" alt="Stock In/Out" width="380"/><br/>
+      <b>Stock In / Out</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/rekap-stok.png" alt="Rekap Stok" width="380"/><br/>
+      <b>Rekap Stok</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/admin-panel.png" alt="Admin Panel" width="380"/><br/>
+      <b>Admin Panel</b>
+    </td>
   </tr>
 </table>
 ## Core Features
