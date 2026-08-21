@@ -13,7 +13,25 @@ Built to reflect real warehouse operations: stock opname (cycle counting), inbou
 With 7+ years in warehouse and supply chain operations, I saw firsthand how much friction comes from spreadsheet-based stock tracking — manual reconciliation, no audit trail, no real-time visibility into reorder points. This project is my attempt to solve that: a lightweight, dependency-free WMS that a small warehouse team could realistically adopt without IT overhead, while also serving as a demonstration of my transition from warehouse operations into IT Business Analyst / application development work.
 
 ---
+## Screenshots
 
+### Stock Dashboard
+![Stock Dashboard](screenshots/stock-dashboard.png)
+
+### Product Master
+![Product Master](screenshots/product-master.png)
+
+### Stock Opname (Cycle Counting)
+![Stock Opname](screenshots/stock-opname.png)
+
+### Stock In / Out
+![Stock In/Out](screenshots/in-out.png)
+
+### Rekap Stok
+![Rekap Stok](screenshots/rekap-stok.png)
+
+### Admin Panel
+![Admin Panel](screenshots/admin-panel.png)
 ## Core Features
 
 ### 🗂️ Product Master
