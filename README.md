@@ -15,23 +15,18 @@ With 7+ years in warehouse and supply chain operations, I saw firsthand how much
 ---
 ## Screenshots
 
-### Stock Dashboard
-![Stock Dashboard](screenshots/stock-dashboard.png)
-
-### Product Master
-![Product Master](screenshots/product-master.png)
-
-### Stock Opname (Cycle Counting)
-![Stock Opname](screenshots/stock-opname.png)
-
-### Stock In / Out
-![Stock In/Out](screenshots/in-out.png)
-
-### Rekap Stok
-![Rekap Stok](screenshots/rekap-stok.png)
-
-### Admin Panel
-![Admin Panel](screenshots/admin-panel.png)
+<table>
+  <tr>
+    <td width="33%"><img src="screenshots/stock-dashboard.png" alt="Stock Dashboard"/><p align="center"><b>Stock Dashboard</b></p></td>
+    <td width="33%"><img src="screenshots/product-master.png" alt="Product Master"/><p align="center"><b>Product Master</b></p></td>
+    <td width="33%"><img src="screenshots/stock-opname.png" alt="Stock Opname"/><p align="center"><b>Stock Opname</b></p></td>
+  </tr>
+  <tr>
+    <td width="33%"><img src="screenshots/in-out.png" alt="Stock In/Out"/><p align="center"><b>Stock In / Out</b></p></td>
+    <td width="33%"><img src="screenshots/rekap-stok.png" alt="Rekap Stok"/><p align="center"><b>Rekap Stok</b></p></td>
+    <td width="33%"><img src="screenshots/admin-panel.png" alt="Admin Panel"/><p align="center"><b>Admin Panel</b></p></td>
+  </tr>
+</table>
 ## Core Features
 
 ### 🗂️ Product Master
