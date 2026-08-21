@@ -1,78 +1,118 @@
-# Warehouse Management System (WMS)
+# 📦 Warehouse Management System (WMS)
 
-A single-file, browser-based Warehouse Management System built to run Stock Opname (cycle counting), Stock In/Out, and real-time inventory reporting — with zero backend, zero install, and zero hosting cost.
+A full-featured, single-file Warehouse Management System built independently as a self-directed project — no backend, no build tools, no dependencies to install. Open the HTML file and the entire system runs in the browser, with all data persisted locally.
 
-Built by **Hartawan Sampoerna Wijaya** — Warehouse & Supply Chain professional turned self-taught developer, based on real operational needs from managing physical warehouses.
+Built to reflect real warehouse operations: stock opname (cycle counting), inbound/outbound tracking, replenishment monitoring, and reporting — the same processes used in enterprise WMS/ERP platforms like SAP WM, Oracle, and Odoo, reimplemented from scratch to demonstrate both domain knowledge and front-end engineering ability.
+
+**🔗 Live/Download:** open `WMS.html` directly in any modern browser — works fully offline after first load.
 
 ---
 
-## Why this exists
+## Why I Built This
 
-Most small-to-mid warehouse teams either overpay for enterprise WMS licenses or run stock control through scattered Excel files with no audit trail, no role separation, and no live dashboard. This project is a working alternative: a single HTML file that any warehouse staff can open in a browser — no server, no database setup, no IT ticket required — and get role-based stock counting, in/out tracking, and management-ready reporting out of the box.
+With 7+ years in warehouse and supply chain operations, I saw firsthand how much friction comes from spreadsheet-based stock tracking — manual reconciliation, no audit trail, no real-time visibility into reorder points. This project is my attempt to solve that: a lightweight, dependency-free WMS that a small warehouse team could realistically adopt without IT overhead, while also serving as a demonstration of my transition from warehouse operations into IT Business Analyst / application development work.
 
-## Screenshots
+---
 
-| Stock Dashboard | Rekap Stok |
-|---|---|
-| ![Stock Dashboard](./screenshots/stock-dashboard.png) | ![Rekap Stok](./screenshots/rekap-stok.png) |
+## Core Features
 
-| Product Master | Stock In/Out |
-|---|---|
-| ![Product Master](./screenshots/product-master.png) | ![Stock In/Out](./screenshots/in-out.png) |
+### 🗂️ Product Master
+- Full CRUD for SKUs: material code, description, quantity, category/subcategory, location, unit price
+- CSV bulk import/export with a robust numeric parser (handles both `1,000.50` and `1.000,50` formats)
+- Category tree management (parent → sub-category)
+- QR code generation per SKU for physical labeling
 
-| Stock Opname (Cycle Counting) | Admin — Role Permissions |
-|---|---|
-| ![Stock Opname](./screenshots/stock-opname.png) | ![Admin Panel](./screenshots/admin-panel.png) |
+### 🔁 Stock Opname (Cycle Counting)
+- Create counting cycles from CSV upload, track progress live
+- Per-item physical count entry with variance calculation (system qty vs. actual)
+- Minimizable "in-progress" counting session — continue other work without losing your place
+- Add unlisted/extra items found during a count
+- Re-upload master data mid-cycle without losing count progress
+- Embedded reports: total variance, accuracy rate, items requiring review, inventory value
 
-## Features
+### 🔄 Stock In / Out
+- Scan or type to look up a product, confirm quantity and note, save transaction
+- Automatic stock-on-hand calculation from system qty + all IN/OUT history
+- Full editable/deletable transaction history with search and type filters
 
-- **Role-Based Access Control** — three access levels (Viewer, Warehouse, Admin) gated by password, each with a distinct permission set enforced on every page (see the in-app Role Permissions matrix).
-- **Product Master Data** — add products manually or bulk-upload via CSV, with material code, description, system quantity, category/sub-category, location, and unit price.
-- **Stock Opname (Cycle Counting)** — create multiple, independently tracked counting cycles, each with its own history, so counts from different periods never overwrite each other.
-- **Barcode / QR Scanning** — scan-mode input for stock counting and stock in/out, plus a built-in QR code generator per product for printable warehouse labels.
-- **Stock In/Out Tracking** — dedicated forms for goods received (IN) and goods issued (OUT), with a searchable, filterable transaction history and CSV export.
-- **Stock Recap (Rekap Stok)** — auto-calculated stock-on-hand per material, total IN, total OUT, inventory value (unit price × SOH), and discrepancy flags, exportable to CSV and Excel.
-- **Stock on Hand Lookup (SOH)** — instant per-material stock check by scan or manual search.
-- **Live Dashboards & Analytics** — Chart.js-powered visualizations: category progress, status distribution, variance by category, and in/out movement, with drill-down stat cards (Total Items, Counted, Pending, Discrepancies).
-- **Category Management** — admin-configurable category/sub-category tree (e.g. SAP → T Block, PLC, Duct, Ferrule), with CSV bulk upload.
-- **Data Backup & Restore** — full data export/import as JSON so the entire dataset can be moved between devices without a server.
-- **Offline-Capable** — the entire app can be downloaded as a single HTML file and run fully offline.
+### 📉 Stock Dashboard
+- Live KPIs: total SKUs, OK/Low/Out-of-stock counts, total qty, total inventory value
+- Stock health visualization by category with drill-down
+- Replenishment warning table with search, status, and category filters
+- Movement chart (recent IN/OUT activity) and clickable stat cards for detail views
+
+### 🕰️ Stock Aging Report *(new)*
+- Every SKU classified into Fresh (≤30 days), Watch (31–90 days), Aging (91–180 days), or Dead Stock (>180 days / never moved), based on the most recent IN, OUT, or count event
+- Sortable, filterable table (by aging bucket, category, or search) — built to surface slow-moving inventory the way a real cycle-count review would
+
+### ⚠️ Low Stock / Reorder Point Alerts *(new)*
+- Per-SKU minimum stock (reorder point) configuration
+- Live sidebar badge showing how many items are currently low or out of stock
+- One-time login alert summarizing items needing attention
+
+### 🔲 Barcode/QR Camera Scanning *(new)*
+- Scan physical barcodes or QR codes directly from a device camera on the Stock Count, Stock In/Out, and Stock-on-Hand lookup screens
+- Uses the native `BarcodeDetector` API where available, with a `jsQR`-based canvas fallback for broader browser support
+- Auto-fills and submits the scan result — no manual typing needed on the warehouse floor
+
+### 🧾 Activity Log *(new)*
+- System-wide audit trail: logins, product add/delete, stock in/out, cycle creation/completion, CSV imports, reorder-point changes
+- Each entry records action, detail, role, and timestamp
+- Searchable and filterable by action type
+
+### 🌙 Dark Mode *(new)*
+- Full dark theme toggle, persisted across sessions
+- Applied consistently across all pages, charts, and tables
+
+### 📑 Rekap Stok & Stock-on-Hand Lookup
+- Aggregated stock recap by SKU/category with real-time inventory value
+- Quick single-item SOH lookup by code or scan
+
+### 📝 Quick Notes
+- Lightweight tagged notes (Urgent / Info / Done / General) for warehouse team communication
+
+### 🔐 Role-Based Access Control
+- Three roles — **Viewer**, **Warehouse**, **Admin** — each with different write/delete permissions enforced at the UI level
+- Password-protected login with role-specific navigation and controls
+
+---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| UI / Logic | Vanilla JavaScript, HTML5, CSS3 (no framework) |
-| Charts | [Chart.js](https://www.chartjs.org/) |
-| CSV parsing | [PapaParse](https://www.papaparse.com/) |
-| QR codes | [qrcodejs](https://github.com/davidshimjs/qrcodejs) |
-| Data persistence | Browser `localStorage` (JSON) |
-| Fonts | DM Sans / DM Mono (Google Fonts) |
+| Layer | Choice | Why |
+|---|---|---|
+| Structure | Single HTML file | Zero install, zero build step — runs anywhere, including offline |
+| Charts | Chart.js | Dashboard visualizations, variance charts, movement trends |
+| CSV parsing | PapaParse | Robust import/export for master data and cycle counts |
+| QR codes | qrcode.js | Label generation for physical SKU tagging |
+| Barcode scanning | Native `BarcodeDetector` API + `jsQR` fallback | Camera-based scanning without a native app |
+| Persistence | `localStorage` | Fully offline-capable; no backend required |
+| Styling | Hand-written CSS with CSS custom properties | Enables full dark-mode theming with minimal duplication |
 
-No backend, no build step, no package manager — the entire application is one `.html` file (4,600+ lines) that runs by double-clicking it or opening it in any modern browser.
+---
 
-## Getting Started
+## Architecture Notes
 
-1. Download `WMS.html` from this repository.
-2. Open it in any modern browser (Chrome, Edge, Firefox).
-3. Log in with one of the three role passwords (set your own in the Admin panel on first run).
-4. Upload your product list via CSV (template downloadable in-app), or add products manually.
-5. Start a new Stock Opname cycle and begin counting.
+- **State management**: a single in-memory state object (`products`, `scanResults`, `ioHistory`, `soCycles`, `quickNotes`, `categoryTree`, `activityLog`) serialized to `localStorage` on every mutation
+- **Stock-on-hand** is always derived, never stored directly — computed as `base qty (from last count or master) + IN history − OUT history`, which keeps the system consistent even after edits to historical transactions
+- **Role gating** is enforced both by hiding UI elements and disabling inputs, applied dynamically after login rather than hard-coded into each page template
+- Designed to be portable: an "Download App (Offline)" button lets any user save a fully working copy of their current data as a standalone HTML file
 
-No installation, no server, no internet connection required after the first load.
+---
 
-## Project Documentation
+## What I'd Build Next
 
-For a deeper look at the system design, data model, and role/permission matrix, see [`PROJECT_DOCUMENTATION.md`](./PROJECT_DOCUMENTATION.md).
+- Backend sync (REST API) for multi-device/multi-warehouse use
+- Batch/lot tracking with FIFO/FEFO expiry logic
+- Role-based approval workflows for stock adjustments
+- Export activity log and aging report to PDF/CSV for management reporting
 
-For the business case — the operational problem this solves and the impact of solving it — see [`BUSINESS_ANALYSIS.md`](./BUSINESS_ANALYSIS.md).
+---
 
-## Background
+## About Me
 
-This project was built independently, outside of formal job responsibilities, by a warehouse operations professional who taught himself to code in order to close a real gap: the lack of an affordable, easy-to-deploy stock counting and inventory tracking tool for warehouse teams without dedicated IT/ERP budgets.
-
-## Author
+Warehouse & Supply Chain professional (7+ years) transitioning into IT Business Analyst work. This project sits at that intersection — built from direct operational experience with stock opname, inventory accuracy, and replenishment processes, implemented as a working application to demonstrate both domain expertise and hands-on development capability.
 
 **Hartawan Sampoerna Wijaya**
-Warehouse & Supply Chain Professional | IT Business Analyst
-📧 hrtwn26@gmail.com
+📍 Depok, West Java, Indonesia
+🎓 S1 Teknik Industri — Institut Sains dan Teknologi Nasional (2016)
